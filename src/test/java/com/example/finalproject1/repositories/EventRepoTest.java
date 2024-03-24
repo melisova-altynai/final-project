@@ -30,7 +30,7 @@ class EventRepoTest {
         Event event1 = new Event();
         event1.setTitle("Silver Slugger Award");
         event1.setDescription("The coach was ejected for arguing with the umpire.");
-        event1.setDateTime("3/29/2023");
+        event1.setDate("3/29/2023");
         event1.setLocation("Chesapeake");
 
         Category musicCategory = new Category();
@@ -47,7 +47,7 @@ class EventRepoTest {
         Event event2 = new Event();
         event2.setTitle("Silver Slugger Award");
         event2.setDescription("The coach was ejected for arguing with the umpire.");
-        event2.setDateTime("3/29/2023");
+        event2.setDate("3/29/2023");
         event2.setLocation("Chesapeake");
 
         Category sportsCategory = new Category();

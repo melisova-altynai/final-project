@@ -24,7 +24,7 @@ public class Event {
     private String description;
 
     @Column(nullable = false)
-    private String dateTime;
+    private String date;
 
     @Column(nullable = false)
     private String location;

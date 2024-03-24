@@ -69,7 +69,7 @@ public class InitData implements CommandLineRunner {
                 Event event = new Event();
                 event.setTitle(line[0]);
                 event.setDescription(line[1]);
-                event.setDateTime(line[2]);
+                event.setDate(line[2]);
                 event.setLocation(line[3]);
 
                 int categoryId = Integer.parseInt(line[4]);

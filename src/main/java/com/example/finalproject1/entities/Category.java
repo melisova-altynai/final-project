@@ -19,4 +19,5 @@ public class Category {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Event> events = new HashSet<>();
+
 }

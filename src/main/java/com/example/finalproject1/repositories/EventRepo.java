@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface EventRepo extends CrudRepository<Event, Integer> {
     List<Event> findAll();
-    Optional<Event> findById(int id);
+
 }
 

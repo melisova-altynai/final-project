@@ -19,14 +19,13 @@ public class UserRepoTest {
 
     @Test
     public void testFindByUsername() {
-        // Save a user to the database
+
         User user = new User();
         user.setUsername("Iiusf Otrr");
         user.setPassword("207854");
         user.setRole(UserRole.PARTICIPANT);
         userRepository.save(user);
 
-        // Retrieve the user from the database using repository method
         Optional<User> result = userRepository.findByUsername("Iiusf Otrr");
 
         assertEquals("Iiusf Otrr", result.get().getUsername(), "Username should match");
@@ -53,7 +52,6 @@ public class UserRepoTest {
         user3.setRole(UserRole.ORGANIZER);
         userRepository.save(user3);
 
-        // Retrieve all users from the database using repository method
         List<User> users = userRepository.findAll();
         assertEquals(103, users.size());
     }

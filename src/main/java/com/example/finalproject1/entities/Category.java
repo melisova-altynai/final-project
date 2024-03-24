@@ -8,6 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
+
 @Table(name = "categories")
 public class Category {
     @Id

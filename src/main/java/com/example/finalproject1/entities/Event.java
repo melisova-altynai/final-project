@@ -11,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "\"events\"")
 public class Event {
     @Id

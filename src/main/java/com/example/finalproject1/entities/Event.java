@@ -1,6 +1,7 @@
 package com.example.finalproject1.entities;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -10,11 +11,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "events")
+@Table(name = "\"events\"")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
     private String title;
@@ -23,14 +24,16 @@ public class Event {
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    private String dateTime;
 
     @Column(nullable = false)
     private String location;
 
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
 
     @ManyToOne
     @JoinColumn(name = "organizer_id", nullable = false)

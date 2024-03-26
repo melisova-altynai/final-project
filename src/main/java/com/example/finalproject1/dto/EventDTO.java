@@ -20,9 +20,10 @@ public class EventDTO {
     private String description;
     private String date;
     private String location;
-    private Category category;
-    private User organizer;
-    private Set<User> participants;
+
+    private CategoryDTO category;
+    private UserDTO organizer;
+    private Set<UserDTO> participants;
 
 }
 

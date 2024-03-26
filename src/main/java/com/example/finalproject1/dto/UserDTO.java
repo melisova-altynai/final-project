@@ -19,6 +19,6 @@ public class UserDTO {
     private String username;
     private String password;
     private UserRole role;
-    private Set<Event> organizedEvents = new HashSet<>();
-    private Set<Event> participatedEvents = new HashSet<>();
+    private Set<EventDTO> organizedEvents;
+    private Set<EventDTO> participatedEvents;
 }

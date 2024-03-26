@@ -1,5 +1,6 @@
 package com.example.finalproject1.dto;
 
+import com.example.finalproject1.entities.Event;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class CategoryDTO {
     private int id;
     private String name;
-    private Set<EventDTO> events = new HashSet<>();
+    private Set<EventDTO> events;
 
 
 }

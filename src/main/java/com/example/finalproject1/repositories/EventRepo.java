@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface EventRepo extends CrudRepository<Event, Integer> {
+    @Override
     List<Event> findAll();
 
 }

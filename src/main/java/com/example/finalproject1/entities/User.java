@@ -28,9 +28,10 @@ public class User {
     private UserRole role;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
-    private Set<Event> organizedEvents = new HashSet<>();
+    private Set<Event> organizedEvents;
 
     @ManyToMany(mappedBy = "participants")
-    private Set<Event> participatedEvents = new HashSet<>();
+    private Set<Event> participatedEvents;
+
 
 }

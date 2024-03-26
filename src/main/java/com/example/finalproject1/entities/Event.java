@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
-@Table(name = "\"events\"")
+@Table(name = "events")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +46,7 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> participants = new HashSet<>();
+    private Set<User> participants;
+
 
 }

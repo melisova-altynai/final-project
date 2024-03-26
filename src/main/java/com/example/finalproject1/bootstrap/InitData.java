@@ -8,20 +8,20 @@ import com.example.finalproject1.entities.Event;
 import com.example.finalproject1.entities.Category;
 import com.example.finalproject1.entities.UserRole;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import java.io.FileReader;
-import java.sql.SQLOutput;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
 @Component
+@Log4j2
+
+
 public class InitData implements CommandLineRunner {
 
     private final UserService userService;
@@ -77,21 +77,21 @@ public class InitData implements CommandLineRunner {
                 if (optionalCategory.isPresent()) {
                     event.setCategory(optionalCategory.get());
                 }
-//                else {
-//                    System.err.println("Category not found for event: " + event.getTitle());
-//                    continue;
-//                }
+                else {
+                    System.err.println("Category not found for event: " + event.getTitle());
+                    continue;
+                }
 
                 int organizerId = Integer.parseInt(line[5]);
                 Optional<User> optionalOrganizer = userService.getUserById(organizerId);
                 if (optionalOrganizer.isPresent()) {
                     event.setOrganizer(optionalOrganizer.get());
                 }
-//                else {
-//
-//                    System.err.println("Organizer not found for event: " + event.getTitle());
-//                    continue;
-//                }
+                else {
+
+                    System.err.println("Organizer not found for event: " + event.getTitle());
+                    continue;
+                }
 
                 eventService.createEvent(event);
             }

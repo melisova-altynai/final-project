@@ -1,15 +1,14 @@
 package com.example.finalproject1.entities;
-import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Builder
-
 @Table(name = "categories")
 public class Category {
     @Id
@@ -20,6 +19,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Event> events = new HashSet<>();
+    private Set<Event> events;
+
 
 }

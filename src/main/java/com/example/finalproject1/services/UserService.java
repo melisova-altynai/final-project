@@ -1,36 +1,18 @@
+
 package com.example.finalproject1.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import com.example.finalproject1.repositories.UserRepo;
 import com.example.finalproject1.entities.User;
-
-
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
-    private final UserRepo userRepository;
 
-    @Autowired
-    public UserService(UserRepo userRepository) {
-        this.userRepository = userRepository;
-    }
+public interface UserService {
+    User createUser(User user);
+    Optional<User> getUserById(int id);
+    Optional<User> getUserByUsername(String username);
+    List<User> getAllUsers();
 
-    public void createUser(User user) {
-        userRepository.save(user);
-    }
-
-    public Optional<User> getUserById(int id) {
-        return userRepository.findById(id);
-    }
-
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    void updateUser(int id, User user);
 }

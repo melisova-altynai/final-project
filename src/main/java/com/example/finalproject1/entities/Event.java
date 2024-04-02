@@ -1,10 +1,7 @@
 package com.example.finalproject1.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -30,14 +27,10 @@ public class Event {
     @Column(nullable = false)
     private String location;
 
-
     @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 
-
     @ManyToOne
-    @JoinColumn(name = "organizer_id")
     private User organizer;
 
     @ManyToMany
@@ -47,6 +40,5 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> participants;
-
 
 }

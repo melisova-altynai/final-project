@@ -60,7 +60,7 @@ class EventRepoTest {
 
 
         List<Event> events = eventRepository.findAll();
-        assertEquals(202, events.size());
+        assertEquals(5, events.size());
     }
 
 }

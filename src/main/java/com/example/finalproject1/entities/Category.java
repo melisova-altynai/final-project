@@ -1,8 +1,9 @@
 package com.example.finalproject1.entities;
+
+import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.*;
 import lombok.*;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +19,8 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Event> events;
+    @OneToMany(mappedBy = "category")
+    private Set<Event> events  = new HashSet<>();;
 
 
 }

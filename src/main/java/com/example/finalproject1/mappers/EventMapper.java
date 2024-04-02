@@ -6,7 +6,6 @@ import com.example.finalproject1.entities.Category;
 import com.example.finalproject1.entities.Event;
 import com.example.finalproject1.entities.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 
 @Mapper

@@ -1,13 +1,12 @@
 package com.example.finalproject1.services;
 
-import com.example.finalproject1.entities.Event;
+import com.example.finalproject1.dto.EventDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface EventService {
-    void createEvent(Event event);
-    Optional<Event> getEventById(int id);
-    List<Event> getAllEvents();
-
-    void updateEvent(int id, Event event);
+    EventDTO createEvent(EventDTO eventDTO);
+    Optional<EventDTO> getEventById(int id);
+    List<EventDTO> getAllEvents();
+    void updateEvent(int id, EventDTO eventDTO);
 }

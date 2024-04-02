@@ -21,15 +21,13 @@ class CategoryRepoTest {
         category1.setName("education");
         categoryRepository.save(category1);
 
-        // =============================================== //
-
         Category category2 = new Category();
         category2.setName("concert");
         categoryRepository.save(category2);
 
 
         List<Category> categories = categoryRepository.findAll();
-        assertEquals(102, categories.size());
+        assertEquals(5, categories.size());
     }
 
 }

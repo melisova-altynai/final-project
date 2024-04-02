@@ -1,13 +1,9 @@
 package com.example.finalproject1.dto;
 
-import com.example.finalproject1.entities.Event;
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor

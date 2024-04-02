@@ -1,48 +1,59 @@
 package com.example.finalproject1.services;
 
-import com.example.finalproject1.repositories.UserRepo;
+import com.example.finalproject1.dto.UserDTO;
 import com.example.finalproject1.entities.User;
+import com.example.finalproject1.mappers.UserMapper;
+import com.example.finalproject1.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepository;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepo userRepository) {
+    public UserServiceImpl(UserRepo userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public User createUser(User user) {
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = userMapper.userDTOtoUser(userDTO);
         userRepository.save(user);
-        return user;
+        return userMapper.userToUserDTO(user);
     }
 
     @Override
-    public Optional<User> getUserById(int id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> getUserById(int id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.map(userMapper::userToUserDTO);
     }
 
     @Override
-    public Optional<User> getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    @Transactional
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        System.out.println(users.get(0).getOrganizedEvents());
+        return users.stream()
+                .map(userMapper::userToUserDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public void updateUser(int id, UserDTO userDTO) {
+        Optional<User> userOptional = userRepository.findById(id);
+        userOptional.ifPresent(user -> {
+            User updatedUser = userMapper.userDTOtoUser(userDTO);
+            updatedUser.setId(id);
+            userRepository.save(updatedUser);
+        });
     }
-
-    @Override
-    public void updateUser(int id, User user) {
-        user.setId(id);
-        userRepository.save(user);
-
-    }
-
 }

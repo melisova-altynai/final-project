@@ -1,14 +1,15 @@
 package com.example.finalproject1.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-
 import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Getter
+@Setter
 @Entity
 @Builder
 @Table(name = "\"user\"")
@@ -17,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -27,11 +28,11 @@ public class User {
     @Column(nullable = false)
     private UserRole role;
 
-    @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organizer",cascade = CascadeType.ALL)
     private Set<Event> organizedEvents;
 
-    @ManyToMany(mappedBy = "participants")
-    private Set<Event> participatedEvents;
+    @ManyToMany(mappedBy = "participants", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Event> participatedEvents  = new HashSet<>();;
 
 
 }

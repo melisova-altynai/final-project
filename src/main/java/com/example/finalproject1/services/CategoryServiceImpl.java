@@ -2,6 +2,7 @@ package com.example.finalproject1.services;
 
 import com.example.finalproject1.dto.CategoryDTO;
 import com.example.finalproject1.entities.Category;
+import com.example.finalproject1.exceptions.NotFoundException;
 import com.example.finalproject1.mappers.CategoryMapper;
 import com.example.finalproject1.repositories.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
     private final CategoryRepo categoryRepository;
     private final CategoryMapper categoryMapper;
 
@@ -45,10 +45,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(int id, CategoryDTO categoryDTO) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
-        categoryOptional.ifPresent(category -> {
+        if (categoryOptional.isPresent()) {
             Category updatedCategory = categoryMapper.categoryDTOtoCategory(categoryDTO);
             updatedCategory.setId(id);
             categoryRepository.save(updatedCategory);
-        });
+        } else {
+            throw new NotFoundException("Category with id " + id + " not found");
+        }
     }
+
 }

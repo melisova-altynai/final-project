@@ -2,6 +2,7 @@ package com.example.finalproject1.services;
 
 import com.example.finalproject1.dto.UserDTO;
 import com.example.finalproject1.entities.User;
+import com.example.finalproject1.exceptions.NotFoundException;
 import com.example.finalproject1.mappers.UserMapper;
 import com.example.finalproject1.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(int id, UserDTO userDTO) {
         Optional<User> userOptional = userRepository.findById(id);
-        userOptional.ifPresent(user -> {
+        if(userOptional.isPresent()){
             User updatedUser = userMapper.userDTOtoUser(userDTO);
             updatedUser.setId(id);
             userRepository.save(updatedUser);
-        });
+        }
+        else{
+            throw new NotFoundException("User with id " + id + " not found");
+
+        }
     }
 }

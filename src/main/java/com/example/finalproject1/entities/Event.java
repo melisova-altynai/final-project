@@ -1,6 +1,7 @@
 package com.example.finalproject1.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ public class Event {
     private int id;
 
     @Column(nullable = false)
+    @NotBlank
     private String title;
 
     @Column(nullable = false)

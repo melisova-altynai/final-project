@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserMapperTest {
     private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
+    //Tests the mapping from User entity to UserDTO
     @Test
     public void userToUserDTO() {
 
@@ -33,6 +34,8 @@ class UserMapperTest {
         assertEquals(UserRole.ORGANIZER, userDTO.getRole());
 
     }
+
+    //Tests the mapping from Event entity to EventDTO.
     @Test
     public void userDTOtoUser() {
 

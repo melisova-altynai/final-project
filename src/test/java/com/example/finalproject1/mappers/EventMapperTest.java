@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventMapperTest {
     private final EventMapper eventMapper = Mappers.getMapper(EventMapper.class);
 
+
+    //Tests the mapping from Event entity to EventDTO
     @Test
     public void eventToEventDTO() {
 
@@ -51,6 +53,8 @@ class EventMapperTest {
 
     }
 
+
+    // Tests the mapping from Event entity to EventDTO
     @Test
     public void eventDTOtoEvent() {
 

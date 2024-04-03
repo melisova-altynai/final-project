@@ -5,7 +5,10 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface CategoryMapper {
+
+    // Converts a Category entity to a CategoryDTO
     CategoryDTO categorytoCategoryDTO(Category category);
+    // Converts a CategoryDTO to Category entity
     Category categoryDTOtoCategory(CategoryDTO categoryDTO);
 
 }

@@ -11,15 +11,10 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface EventMapper {
 
+    // Converts event entity to eventDTO
     EventDTO eventToEventDTO(Event event);
+    // Converts eventDTO to event entity
     Event eventDTOtoEvent(EventDTO eventDTO);
 
-    CategoryDTO categorytoCategoryDTO(Category category);
-
-    Category categoryDTOtoCategory(CategoryDTO dto);
-
-    UserDTO userToUserDTO(User user);
-
-    User userDTOtoUser(UserDTO dto);
 
 }

@@ -8,7 +8,10 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface UserMapper {
+
+    // Converts user entity to userDTo
     UserDTO userToUserDTO(User user);
+    // Converts userDTO to user entity
     User userDTOtoUser(UserDTO userDTO);
 
     @Mapping(target = "organizer", ignore = true)

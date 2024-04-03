@@ -2,6 +2,7 @@ package com.example.finalproject1.services;
 
 import com.example.finalproject1.dto.EventDTO;
 import com.example.finalproject1.entities.Event;
+import com.example.finalproject1.exceptions.NotFoundException;
 import com.example.finalproject1.mappers.EventMapper;
 import com.example.finalproject1.repositories.EventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,12 @@ public class EventServiceImpl implements EventService {
     @Override
     public void updateEvent(int id, EventDTO eventDTO) {
         Optional<Event> eventOptional = eventRepository.findById(id);
-        eventOptional.ifPresent(event -> {
+        if (eventOptional.isPresent()){
             Event updatedEvent = eventMapper.eventDTOtoEvent(eventDTO);
             updatedEvent.setId(id);
             eventRepository.save(updatedEvent);
-        });
+        }else{
+            throw new NotFoundException("Event with id " + id + " not found");
+        }
     }
 }

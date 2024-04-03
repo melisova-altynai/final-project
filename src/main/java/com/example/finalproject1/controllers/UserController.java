@@ -55,10 +55,12 @@ public class UserController {
 
     //update user by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable int id,@Validated @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable int id, @Validated @RequestBody UserDTO userDTO) {
         try{
             userService.updateUser(id, userDTO);
-            return ResponseEntity.ok().build();
+            UserDTO updatedUserDTO = userService.getUserById(id)
+                    .orElseThrow(() -> new NotFoundException("Category with id " + id + " not found"));
+            return ResponseEntity.ok(updatedUserDTO);
         }catch (NotFoundException e) {
             throw new NotFoundException("User with id " + id + " not found");
         }
@@ -66,7 +68,7 @@ public class UserController {
 
     //partially update user by id
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> partiallyUpdateUser(
+    public ResponseEntity<Optional<UserDTO>> partiallyUpdateUser(
             @PathVariable int id,
             @Validated @RequestBody Map<String, Object> updates) {
 
@@ -87,9 +89,8 @@ public class UserController {
                         break;
                 }
             });
-            userService.updateUser(id, userDTO);
 
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(userOptional);
         } else {
             throw new NotFoundException("User with id " + id + " not found");
         }

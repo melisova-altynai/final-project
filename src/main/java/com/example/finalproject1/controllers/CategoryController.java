@@ -53,10 +53,12 @@ public class CategoryController {
 
     //update category by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateCategory(@PathVariable int id, @Validated @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable int id, @Validated @RequestBody CategoryDTO categoryDTO) {
         try{
             categoryService.updateCategory(id, categoryDTO);
-            return ResponseEntity.ok().build();
+            CategoryDTO updatedCategoryDTO = categoryService.getCategoryById(id)
+                    .orElseThrow(() -> new NotFoundException("Category with id " + id + " not found"));
+            return ResponseEntity.ok(updatedCategoryDTO);
         }catch (NotFoundException e) {
             throw new NotFoundException("Category with id " + id + " not found");
         }
@@ -65,7 +67,7 @@ public class CategoryController {
 
     // partially update category by id
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> partiallyUpdateCategory(
+    public ResponseEntity<Optional<CategoryDTO>> partiallyUpdateCategory(
             @PathVariable int id,
             @Validated @RequestBody Map<String, Object> updates) {
 
@@ -82,7 +84,7 @@ public class CategoryController {
             });
             categoryService.updateCategory(id, categoryDTO);
 
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(categoryOptional);
         } else {
             throw new NotFoundException("Category with id " + id + " not found");
         }

@@ -57,10 +57,12 @@ public class EventController {
 
     //update event by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateEvent(@PathVariable int id, @Validated @RequestBody EventDTO eventDTO) {
+    public ResponseEntity<EventDTO> updateEvent(@PathVariable int id, @Validated @RequestBody EventDTO eventDTO) {
         try{
             eventService.updateEvent(id, eventDTO);
-            return ResponseEntity.ok().build();
+            EventDTO updatedEventDTO = eventService.getEventById(id)
+                    .orElseThrow(() -> new NotFoundException("Category with id " + id + " not found"));
+            return ResponseEntity.ok(updatedEventDTO);
         }catch (NotFoundException e) {
             throw new NotFoundException("Event with id " + id + " not found");
         }
@@ -68,7 +70,7 @@ public class EventController {
 
     //partially event by id
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> partiallyUpdateCategory(
+    public ResponseEntity<Optional<EventDTO>> partiallyUpdateCategory(
             @PathVariable int id,
             @Validated @RequestBody Map<String, Object> updates) {
 
@@ -94,7 +96,7 @@ public class EventController {
             });
             eventService.updateEvent(id, eventDTO);
 
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(eventOptional);
         } else {
             throw new NotFoundException("Event with id " + id + " not found");
         }

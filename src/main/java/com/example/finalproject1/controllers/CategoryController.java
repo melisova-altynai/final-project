@@ -28,7 +28,7 @@ public class CategoryController {
 
     // Create new category
     @PostMapping
-    public ResponseEntity<Void> createCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Void> createCategory(@Validated @RequestBody CategoryDTO categoryDTO) {
         categoryService.createCategory(categoryDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -53,7 +53,7 @@ public class CategoryController {
 
     //update category by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateCategory(@PathVariable int id,@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Void> updateCategory(@PathVariable int id, @Validated @RequestBody CategoryDTO categoryDTO) {
         try{
             categoryService.updateCategory(id, categoryDTO);
             return ResponseEntity.ok().build();

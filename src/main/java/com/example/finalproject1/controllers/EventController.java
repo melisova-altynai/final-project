@@ -29,8 +29,8 @@ public class EventController {
     }
 
     //create new event
-    @PostMapping("")
-    public ResponseEntity<EventDTO> createEvent( @RequestBody EventDTO eventDTO) {
+    @PostMapping(" ")
+    public ResponseEntity<EventDTO> createEvent(@Validated @RequestBody EventDTO eventDTO) {
         EventDTO savedEventDTO = eventService.createEvent(eventDTO);
         return ResponseEntity
                 .created(URI.create("/api/v1/event" + savedEventDTO.getId()))
@@ -57,7 +57,7 @@ public class EventController {
 
     //update event by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateEvent(@PathVariable int id,  @RequestBody EventDTO eventDTO) {
+    public ResponseEntity<Void> updateEvent(@PathVariable int id, @Validated @RequestBody EventDTO eventDTO) {
         try{
             eventService.updateEvent(id, eventDTO);
             return ResponseEntity.ok().build();

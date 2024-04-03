@@ -55,7 +55,7 @@ public class UserController {
 
     //update user by id
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
+    public ResponseEntity<Void> updateUser(@PathVariable int id,@Validated @RequestBody UserDTO userDTO) {
         try{
             userService.updateUser(id, userDTO);
             return ResponseEntity.ok().build();
@@ -68,7 +68,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<Void> partiallyUpdateUser(
             @PathVariable int id,
-            @RequestBody Map<String, Object> updates) {
+            @Validated @RequestBody Map<String, Object> updates) {
 
         Optional<UserDTO> userOptional = userService.getUserById(id);
 

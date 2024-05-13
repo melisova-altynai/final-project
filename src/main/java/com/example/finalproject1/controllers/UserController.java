@@ -1,15 +1,24 @@
 package com.example.finalproject1.controllers;
 
 
-import com.example.finalproject1.dto.UserDTO;
+import com.example.finalproject1.dto.JwtTokenDto;
+import com.example.finalproject1.dto.*;
+import com.example.finalproject1.entities.RefreshToken;
 import com.example.finalproject1.entities.User;
 import com.example.finalproject1.entities.UserRole;
 import com.example.finalproject1.exceptions.NotFoundException;
 import com.example.finalproject1.repositories.UserRepo;
+import com.example.finalproject1.services.JwtService;
+import com.example.finalproject1.services.RefreshTokenService;
 import com.example.finalproject1.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,15 +26,28 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 @RequestMapping("api/v1/users")
 public class UserController {
     private final UserService userService;
     private final UserRepo userRepository;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
 
-    @Autowired
-    public UserController(UserService userService, UserRepo userRepository) {
-        this.userService = userService;
-        this.userRepository = userRepository;
+    @PostMapping("login")
+    public JwtTokenDto login(@RequestBody AuthLoginDTO loginDto){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+        if(authentication.isAuthenticated()){
+            RefreshToken refreshToken = refreshTokenService.createRefreshToken(loginDto.getUsername());
+            return JwtTokenDto.builder()
+                    .accessToken(jwtService.GenerateToken(loginDto.getUsername()))
+                    .refreshToken(refreshToken.getToken())
+                    .build();
+        } else {
+            throw new UsernameNotFoundException("invalid user request..!!");
+        }
     }
 
     //create new user

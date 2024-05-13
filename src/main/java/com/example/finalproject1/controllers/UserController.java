@@ -32,23 +32,23 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
     private final UserRepo userRepository;
-    private final AuthenticationManager authenticationManager;
+//    private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
 
-    @PostMapping("login")
-    public JwtTokenDto login(@RequestBody AuthLoginDTO loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-        if(authentication.isAuthenticated()){
-            RefreshToken refreshToken = refreshTokenService.createRefreshToken(loginDto.getUsername());
-            return JwtTokenDto.builder()
-                    .accessToken(jwtService.GenerateToken(loginDto.getUsername()))
-                    .refreshToken(refreshToken.getToken())
-                    .build();
-        } else {
-            throw new UsernameNotFoundException("invalid user request..!!");
-        }
-    }
+//    @PostMapping("login")
+//    public JwtTokenDto login(@RequestBody AuthLoginDTO loginDto){
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+//        if(authentication.isAuthenticated()){
+//            RefreshToken refreshToken = refreshTokenService.createRefreshToken(loginDto.getUsername());
+//            return JwtTokenDto.builder()
+//                    .accessToken(jwtService.GenerateToken(loginDto.getUsername()))
+//                    .refreshToken(refreshToken.getToken())
+//                    .build();
+//        } else {
+//            throw new UsernameNotFoundException("invalid user request..!!");
+//        }
+//    }
 
     //create new user
     @PostMapping

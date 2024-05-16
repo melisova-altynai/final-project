@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Builder
-@Table(name = "\"user\"")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String email;
+
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private UserRole role;
 
     @OneToMany(mappedBy = "organizer",cascade = CascadeType.ALL)
@@ -33,6 +35,7 @@ public class User {
 
     @ManyToMany(mappedBy = "participants", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Event> participatedEvents  = new HashSet<>();;
+
 
 
 }

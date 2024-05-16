@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class CategoryDTO {
-    private int id;
-    private String name;
+public class RegisterDTO {
+    private String username;
+    private String password;
+    private String email;
+
 }

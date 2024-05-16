@@ -30,13 +30,13 @@ public class InitData implements CommandLineRunner {
 
         categoryRepository.saveAll(List.of(category1, category2, category3));
 
-        User user3 = new User(3,"Aidana", "23455", UserRole.ORGANIZER, new HashSet<>(), null);
-        User user1 = new User(1,"Aidin", "123566", UserRole.ORGANIZER, new HashSet<>(),null);
-        User user2 = new User(2,"Altynai","789456",UserRole.PARTICIPANT,null,new HashSet<>());
-        User user5 = new User(5,"Atai", "789415", UserRole.PARTICIPANT,null, new HashSet<>());
-        User user6 = new User(6,"Samira","124563",UserRole.PARTICIPANT, null, new HashSet<>());
-        User user7 = new User(7,"Umar","789456",UserRole.PARTICIPANT, null, new HashSet<>());
-        User user4 = new User(4,"Madina", "124545", UserRole.ORGANIZER, new HashSet<>(),null);
+        User user3 = new User(3,"Aidana", "23455", "example@com", UserRole.ORGANIZER, new HashSet<>(), null);
+        User user1 = new User(1,"Aidin", "123566", "example2@gmail.com", UserRole.ORGANIZER, new HashSet<>(),null);
+        User user2 = new User(2,"Altynai","789456","example3@gmail.com",UserRole.PARTICIPANT,null,new HashSet<>());
+        User user5 = new User(5,"Atai", "789415", "example4@gmail.com",UserRole.PARTICIPANT,null, new HashSet<>());
+        User user6 = new User(6,"Samira","124563","example5@gmail.com",UserRole.PARTICIPANT, null, new HashSet<>());
+        User user7 = new User(7,"Umar","789456","example6@gmail.com",UserRole.PARTICIPANT, null, new HashSet<>());
+        User user4 = new User(4,"Madina", "124545","example7@gmail.com", UserRole.ORGANIZER, new HashSet<>(),null);
 
         userRepository.saveAll(List.of(user1, user2, user3, user4, user5, user6, user7));
 

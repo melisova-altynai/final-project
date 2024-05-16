@@ -23,10 +23,14 @@ public class RefreshTokenService {
         RefreshToken refreshToken = RefreshToken.builder()
                 .user(userRepository.findByUsername(username))
                 .token(UUID.randomUUID().toString())
-                .expiryDate(Instant.now().plusMillis(600000)) // set expiry of refresh token to 10 minutes - you can configure it application.properties file
+                .expiryDate(Instant.now().plusMillis(600000))
                 .build();
         return refreshTokenRepository.save(refreshToken);
     }
+
+
+
+
 
 
     public Optional<RefreshToken> findByToken(String token){

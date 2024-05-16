@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -31,20 +30,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(
                         req -> req
-                                .requestMatchers( "/api/v1/auth/**", "/api/v1/refreshToken", "/error").permitAll()
-                                .requestMatchers("/api/**").authenticated()
+                                .requestMatchers( "/api/v1/auth/**", "/api/v1/auth/refreshToken", "/error", "api/v1/auth/token").permitAll()
+                                .requestMatchers("/api/**").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .formLogin(withDefaults())
                 .oauth2Login(withDefaults())
                 .authenticationProvider(authProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-
-
         return http.build();
 
     }
-
 
     @Bean
     public AuthenticationProvider authProvider() {

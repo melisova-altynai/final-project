@@ -23,6 +23,4 @@ public class EmailVerification {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
 }
